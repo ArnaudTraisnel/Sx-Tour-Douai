@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import supabase from '@/services/supabase'
+import { sendEmail } from '@/services/emailService'
 
 const mockMessages = [
   {

@@ -1,12 +1,12 @@
-import { defineConfig } from "vite"
+import { defineConfig } from 'vite'
 import vue from "@vitejs/plugin-vue"
 import path from "path"
 
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
   server: {
-    port: 5173,
-    open: true
+    port: 5173
   },
   resolve: {
     alias: {
@@ -16,24 +16,19 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "sass:math"; @use "src/assets/styles/_variables.scss" as *;`
+        additionalData: `@import "@/assets/styles/_variables.scss";`
       }
     }
   },
   optimizeDeps: {
-    exclude: ['@sendgrid/mail']
+    exclude: []
   },
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: false,
     rollupOptions: {
-      external: ['fs', 'path'],
       output: {
-        manualChunks: {
-          'vendor': ['vue', 'vue-router'],
-          'styles': ['./src/assets/styles/main.scss']
-        }
+        manualChunks: {}
       }
     }
   }
