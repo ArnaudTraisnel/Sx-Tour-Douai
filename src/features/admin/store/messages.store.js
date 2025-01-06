@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import supabase from '@/services/supabase'
 
 const mockMessages = [
   {
@@ -105,54 +106,110 @@ const mockMessages = [
 
 export const useMessagesStore = defineStore('messages', {
   state: () => ({
-    messages: [...mockMessages],
+    messages: [],
     loading: false,
     error: null
   }),
 
   getters: {
     unreadCount: (state) => state.messages.filter(m => !m.read).length,
-    sortedMessages: (state) => [...state.messages].sort((a, b) => new Date(b.date) - new Date(a.date))
+    sortedMessages: (state) => {
+      return [...state.messages].sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+    }
   },
 
   actions: {
     async fetchMessages() {
       this.loading = true
       try {
-        // Simuler un appel API
-        await new Promise(resolve => setTimeout(resolve, 500))
-        this.messages = [...mockMessages]
+        console.log('Récupération des messages...')
+        const { data, error } = await supabase
+          .from('messages')
+          .select('*')
+          .order('created_at', { ascending: false })
+
+        if (error) {
+          console.error('Erreur Supabase lors de la récupération:', error)
+          throw error
+        }
+
+        console.log('Messages récupérés:', data)
+        this.messages = data
         this.error = null
       } catch (error) {
-        this.error = 'Erreur lors du chargement des messages'
         console.error('Error fetching messages:', error)
+        this.error = 'Erreur lors du chargement des messages'
       } finally {
         this.loading = false
       }
     },
 
-    async markAsRead(messageId) {
-      const message = this.messages.find(m => m.id === messageId)
-      if (message) {
-        message.read = true
+    async addMessage(message) {
+      try {
+        console.log('Tentative d\'ajout du message:', message)
+        const { data, error } = await supabase
+          .from('messages')
+          .insert([{
+            sender: message.name,
+            email: message.email,
+            subject: message.subject,
+            content: message.content,
+            status: 'unread',
+            created_at: new Date().toISOString()
+          }])
+          .select()
+
+        if (error) {
+          console.error('Erreur Supabase lors de l\'ajout:', error)
+          throw error
+        }
+
+        console.log('Message ajouté avec succès:', data)
+        // Ajouter le nouveau message au state
+        if (data && data[0]) {
+          this.messages.unshift(data[0])
+        }
+      } catch (error) {
+        console.error('Erreur lors de l\'ajout du message:', error)
+        throw error
       }
     },
 
-    async markAsUnread(messageId) {
-      const message = this.messages.find(m => m.id === messageId)
-      if (message) {
-        message.read = false
+    async updateMessageStatus(messageId, status) {
+      try {
+        const { error } = await supabase
+          .from('messages')
+          .update({ status })
+          .eq('id', messageId)
+
+        if (error) throw error
+
+        // Mettre à jour le message dans le state
+        const index = this.messages.findIndex(m => m.id === messageId)
+        if (index !== -1) {
+          this.messages[index].status = status
+        }
+      } catch (error) {
+        console.error('Error updating message status:', error)
+        throw error
       }
     },
 
     async deleteMessage(messageId) {
-      this.messages = this.messages.filter(m => m.id !== messageId)
-    },
+      try {
+        const { error } = await supabase
+          .from('messages')
+          .delete()
+          .eq('id', messageId)
 
-    async replyToMessage(messageId, replyContent) {
-      // Simuler l'envoi d'une réponse
-      await new Promise(resolve => setTimeout(resolve, 300))
-      console.log(`Reply sent to message ${messageId}:`, replyContent)
+        if (error) throw error
+
+        // Supprimer le message du state
+        this.messages = this.messages.filter(m => m.id !== messageId)
+      } catch (error) {
+        console.error('Error deleting message:', error)
+        throw error
+      }
     }
   }
 })

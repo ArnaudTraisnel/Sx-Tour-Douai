@@ -60,9 +60,9 @@
             <div class="px-4 py-4">
               <div class="flex justify-between items-baseline mb-1">
                 <h3 class="text-base font-medium text-gray-900 group-hover:text-red-600 transition-colors duration-200">
-                  {{ message.name }}
+                  {{ message.sender }}
                 </h3>
-                <time class="text-sm text-gray-500">{{ formatDate(message.date) }}</time>
+                <time class="text-sm text-gray-500">{{ formatDate(message.created_at) }}</time>
               </div>
               <h4 
                 class="text-base text-gray-900 mb-2 truncate"
@@ -70,7 +70,7 @@
               >
                 {{ message.subject }}
               </h4>
-              <p class="text-sm text-gray-500 line-clamp-2">{{ message.preview }}</p>
+              <p class="text-sm text-gray-500 line-clamp-2">{{ message.content }}</p>
             </div>
           </div>
         </div>
@@ -100,11 +100,11 @@
           <div class="px-4 py-2">
             <h2 class="text-xl font-medium text-gray-900 mb-4">{{ selectedMessage.subject }}</h2>
             <div class="text-sm text-gray-600">
-              <span class="font-medium">{{ selectedMessage.name }}</span>
+              <span class="font-medium">{{ selectedMessage.sender }}</span>
               <span class="mx-1">&lt;{{ selectedMessage.email }}&gt;</span>
             </div>
             <div class="text-sm text-gray-500 mt-1">
-              {{ formatDate(selectedMessage.date, true) }}
+              {{ formatDate(selectedMessage.created_at, true) }}
             </div>
             <div class="mt-6 prose max-w-none">
               <p class="whitespace-pre-wrap">{{ selectedMessage.content }}</p>
@@ -170,8 +170,9 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useMessagesStore } from '../store/messages.store'
+import { sendEmail } from '@/services/emailService'
 
 const messagesStore = useMessagesStore()
 const searchQuery = ref('')
@@ -186,6 +187,7 @@ const handleResize = () => {
 }
 
 onMounted(() => {
+  console.log('Messages component mounted')
   window.addEventListener('resize', handleResize)
   messagesStore.fetchMessages()
 })
@@ -195,12 +197,14 @@ onUnmounted(() => {
 })
 
 const filteredMessages = computed(() => {
+  console.log('Computing filtered messages')
   let messages = messagesStore.sortedMessages
+  console.log('Got sorted messages:', messages)
   
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase()
     messages = messages.filter(message => 
-      message.name.toLowerCase().includes(query) ||
+      message.sender.toLowerCase().includes(query) ||
       message.subject.toLowerCase().includes(query) ||
       message.content.toLowerCase().includes(query)
     )
@@ -212,13 +216,25 @@ const filteredMessages = computed(() => {
     )
   }
 
+  console.log('Filtered messages:', messages)
   return messages
+})
+
+// Forcer le rafraîchissement des messages toutes les 5 secondes
+const refreshInterval = setInterval(() => {
+  console.log('Refreshing messages')
+  messagesStore.fetchMessages()
+}, 5000)
+
+// Nettoyer l'intervalle quand le composant est détruit
+onUnmounted(() => {
+  clearInterval(refreshInterval)
 })
 
 function selectMessage(message) {
   selectedMessage.value = message
   if (!message.read) {
-    messagesStore.markAsRead(message.id)
+    messagesStore.updateMessageStatus(message.id, 'read')
   }
   showReplyForm.value = false
 }
@@ -229,11 +245,8 @@ function closeMessage() {
 }
 
 function toggleRead(message) {
-  if (message.read) {
-    messagesStore.markAsUnread(message.id)
-  } else {
-    messagesStore.markAsRead(message.id)
-  }
+  const newStatus = message.read ? 'unread' : 'read'
+  messagesStore.updateMessageStatus(message.id, newStatus)
 }
 
 async function deleteMessage(message) {
@@ -245,11 +258,35 @@ async function deleteMessage(message) {
 }
 
 async function sendReply() {
-  if (!replyContent.value.trim()) return
-  
-  await messagesStore.replyToMessage(selectedMessage.value.id, replyContent.value)
-  replyContent.value = ''
-  showReplyForm.value = false
+  if (!replyContent.value.trim()) {
+    return
+  }
+
+  try {
+    const response = await sendEmail({
+      to: selectedMessage.value.email,
+      subject: `Re: ${selectedMessage.value.subject}`,
+      text: replyContent.value,
+      html: `<p>${replyContent.value.replace(/\n/g, '<br>')}</p>`
+    })
+
+    if (response.success) {
+      // Mettre à jour le statut du message
+      await messagesStore.updateMessageStatus(selectedMessage.value.id, 'replied')
+      
+      // Réinitialiser le formulaire
+      replyContent.value = ''
+      showReplyForm.value = false
+      
+      // Notification de succès
+      alert('Réponse envoyée avec succès')
+    } else {
+      throw new Error(response.error)
+    }
+  } catch (error) {
+    console.error('Erreur lors de l\'envoi de la réponse:', error)
+    alert('Erreur lors de l\'envoi de la réponse. Veuillez réessayer.')
+  }
 }
 
 function formatDate(date, detailed = false) {

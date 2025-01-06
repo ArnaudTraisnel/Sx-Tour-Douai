@@ -132,7 +132,9 @@
 <script setup>
 import { ref } from "vue"
 import { ChevronDownIcon } from "@heroicons/vue/24/outline"
+import { useMessagesStore } from "@/features/admin/store/messages.store"
 
+const messagesStore = useMessagesStore()
 const formData = ref({
   name: "",
   email: "",
@@ -165,9 +167,54 @@ const faqItems = [
   }
 ]
 
-const handleSubmit = () => {
-  // Logique d'envoi du formulaire à implémenter
-  console.log("Form submitted:", formData.value)
+const handleSubmit = async () => {
+  try {
+    console.log('Début de la soumission du formulaire')
+    
+    // Validation basique
+    if (!formData.value.name.trim() || !formData.value.email.trim() || !formData.value.subject.trim() || !formData.value.message.trim()) {
+      alert("Veuillez remplir tous les champs obligatoires")
+      return
+    }
+
+    // Validation de l'email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.value.email)) {
+      alert("Veuillez entrer une adresse email valide")
+      return
+    }
+
+    console.log('Validation passée, création du message')
+    
+    // Créer un nouveau message
+    const newMessage = {
+      name: formData.value.name,
+      email: formData.value.email,
+      subject: formData.value.subject,
+      content: formData.value.message
+    }
+
+    console.log('Message créé:', newMessage)
+
+    // Ajouter le message à la base de données via le store
+    console.log('Tentative d\'ajout au store...')
+    await messagesStore.addMessage(newMessage)
+    console.log('Message ajouté avec succès au store')
+
+    // Réinitialiser le formulaire
+    formData.value = {
+      name: "",
+      email: "",
+      subject: "",
+      message: ""
+    }
+
+    // Afficher une confirmation
+    alert("Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.")
+  } catch (error) {
+    console.error('Erreur lors de l\'envoi du message:', error)
+    alert("Une erreur est survenue lors de l'envoi du message. Veuillez réessayer.")
+  }
 }
 </script>
 
