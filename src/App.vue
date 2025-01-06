@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, ref, computed } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import Navigation from "./components/Navigation.vue"
 import Footer from "./components/Footer.vue"
@@ -13,8 +13,6 @@ const showFooter = computed(() => {
 })
 
 onMounted(async () => {
-  console.log('App mounted, current route:', route.name)
-  // Enregistre une visite à chaque chargement de l'app
   if (!route.path.startsWith('/admin')) {
     await statsStore.recordVisit()
   }
@@ -42,22 +40,4 @@ onMounted(async () => {
   </div>
 </template>
 
-<style lang="scss">
-.min-h-screen {
-  min-height: 100vh;
-}
-
-.flex-1 {
-  flex: 1;
-}
-
-.page-enter-active,
-.page-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.page-enter-from,
-.page-leave-to {
-  opacity: 0;
-}
-</style>
+<style lang="scss" src="@/assets/styles/main.scss"></style>

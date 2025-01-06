@@ -62,12 +62,14 @@
   </div>
   <PilotesSection />
   <ProgrammeSection />
+  <PartnersSection />
 </template>
 
 <script setup>
 import { ref, onMounted, onActivated, onDeactivated } from 'vue'
-import ProgrammeSection from '@/components/ProgrammeSection.vue'
-import PilotesSection from '@/components/PilotesSection.vue'
+import ProgrammeSection from '../components/ProgrammeSection.vue'
+import PilotesSection from '../components/PilotesSection.vue'
+import PartnersSection from '../components/PartnersSection.vue'
 import videoSource from '@/assets/videos/SXTour2024.mp4'
 
 const videoRef = ref(null)
