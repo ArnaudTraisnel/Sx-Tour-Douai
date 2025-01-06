@@ -10,30 +10,29 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src")
+      '@': path.resolve(__dirname, 'src')
     }
   },
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "@/assets/styles/variables.scss";`
+        additionalData: `@use "sass:math"; @use "src/assets/styles/_variables.scss" as *;`
       }
     }
   },
+  optimizeDeps: {
+    exclude: ['@sendgrid/mail']
+  },
   build: {
-    target: 'es2015',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      }
-    },
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false,
     rollupOptions: {
+      external: ['fs', 'path'],
       output: {
         manualChunks: {
           'vendor': ['vue', 'vue-router'],
-          'styles': ['@/assets/styles/main.scss']
+          'styles': ['./src/assets/styles/main.scss']
         }
       }
     }
