@@ -1,24 +1,24 @@
 <template>
-  <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+  <nav class="bg-white/95 backdrop-blur-sm shadow-lg fixed w-full top-0 z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-20">
+      <div class="flex justify-between items-center h-16 md:h-20">
         <!-- Logo -->
         <div class="flex items-center">
-          <router-link to="/" class="text-lg sm:text-xl md:text-2xl lg:text-2xl font-bold whitespace-nowrap">
-            <span class="text-gray-800">Supercross</span>
-            <span class="text-red-600"> Douai</span>
+          <router-link to="/" class="text-2xl md:text-3xl lg:text-4xl font-black tracking-tight whitespace-nowrap">
+            <span class="text-gray-900">Supercross</span>
+            <span class="bg-gradient-to-r from-red-600 to-red-500 bg-clip-text text-transparent"> Douai</span>
           </router-link>
         </div>
 
         <!-- Desktop Menu -->
-        <div class="hidden sm:flex sm:items-center">
-          <div class="flex items-center space-x-1 md:space-x-2 lg:space-x-4">
+        <div class="hidden lg:flex lg:items-center">
+          <div class="flex items-center space-x-6 lg:space-x-8">
             <router-link
               v-for="item in menuItems"
               :key="item.path"
               :to="item.path"
-              class="px-2 md:px-3 py-2 rounded-md text-sm md:text-base lg:text-base font-medium hover:text-red-600 transition-colors whitespace-nowrap"
-              :class="[$route.path === item.path ? 'text-red-600' : 'text-gray-600']"
+              class="px-3 py-2 text-base font-medium tracking-wide transition-all duration-300 hover:bg-gray-50"
+              :class="[$route.path === item.path ? 'text-red-600' : 'text-gray-700']"
             >
               {{ item.name }}
             </router-link>
@@ -26,8 +26,8 @@
             <router-link
               v-if="isLoggedIn"
               to="/admin"
-              class="px-2 md:px-3 py-2 rounded-md text-sm md:text-base lg:text-base font-medium hover:text-red-600 transition-colors whitespace-nowrap"
-              :class="[$route.path.startsWith('/admin') ? 'text-red-600' : 'text-gray-600']"
+              class="px-3 py-2 text-base font-medium tracking-wide transition-all duration-300 hover:bg-gray-50"
+              :class="[$route.path.startsWith('/admin') ? 'text-red-600' : 'text-gray-700']"
             >
               Dashboard
             </router-link>
@@ -35,7 +35,7 @@
             <button
               v-if="isLoggedIn"
               @click="handleLogout"
-              class="group inline-flex items-center justify-center px-3 md:px-4 py-2 text-sm md:text-base lg:text-base font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-all duration-300 transform hover:scale-105 hover:shadow-xl whitespace-nowrap"
+              class="inline-flex items-center justify-center px-5 py-2.5 text-base font-semibold text-white bg-gradient-to-r from-red-600 to-red-500 rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg active:scale-[0.98]"
             >
               Déconnexion
             </button>
@@ -43,16 +43,16 @@
         </div>
 
         <!-- Mobile menu button -->
-        <div class="flex items-center sm:hidden">
+        <div class="flex items-center lg:hidden">
           <button
             @click="mobileMenuOpen = !mobileMenuOpen"
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-red-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-500"
+            class="inline-flex items-center justify-center p-2.5 rounded-lg text-gray-700 hover:text-red-600 hover:bg-gray-100 transition-colors duration-300 focus:outline-none"
           >
-            <span class="sr-only">Open main menu</span>
+            <span class="sr-only">Ouvrir le menu</span>
             <!-- Icon when menu is closed -->
             <svg
               v-if="!mobileMenuOpen"
-              class="block h-6 w-6"
+              class="h-6 w-6"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -68,7 +68,7 @@
             <!-- Icon when menu is open -->
             <svg
               v-else
-              class="block h-6 w-6"
+              class="h-6 w-6"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -89,15 +89,15 @@
     <!-- Mobile menu -->
     <div
       v-show="mobileMenuOpen"
-      class="sm:hidden bg-white border-b border-gray-200"
+      class="lg:hidden bg-white/95 backdrop-blur-sm border-t border-gray-100"
     >
-      <div class="px-2 pt-2 pb-3 space-y-1">
+      <div class="px-3 pt-2 pb-3 space-y-1.5">
         <router-link
           v-for="item in menuItems"
           :key="item.path"
           :to="item.path"
-          class="block px-3 py-2 rounded-md text-base font-medium hover:text-red-600 transition-colors"
-          :class="[$route.path === item.path ? 'text-red-600' : 'text-gray-600']"
+          class="block px-3 py-2.5 text-base font-medium tracking-wide transition-all duration-300"
+          :class="[$route.path === item.path ? 'text-red-600' : 'text-gray-700 hover:bg-gray-50']"
           @click="mobileMenuOpen = false"
         >
           {{ item.name }}
@@ -106,8 +106,8 @@
         <router-link
           v-if="isLoggedIn"
           to="/admin"
-          class="block px-3 py-2 rounded-md text-base font-medium hover:text-red-600 transition-colors"
-          :class="[$route.path.startsWith('/admin') ? 'text-red-600' : 'text-gray-600']"
+          class="block px-3 py-2.5 text-base font-medium tracking-wide transition-all duration-300"
+          :class="[$route.path.startsWith('/admin') ? 'text-red-600' : 'text-gray-700 hover:bg-gray-50']"
           @click="mobileMenuOpen = false"
         >
           Dashboard
@@ -116,7 +116,7 @@
         <button
           v-if="isLoggedIn"
           @click="handleLogout"
-          class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-white bg-red-600 hover:bg-red-700 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+          class="w-full text-left px-3 py-2.5 text-base font-semibold text-white bg-gradient-to-r from-red-600 to-red-500 transition-all duration-300 hover:from-red-700 hover:to-red-600"
         >
           Déconnexion
         </button>

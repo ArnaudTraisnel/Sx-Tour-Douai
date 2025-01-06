@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 import Navigation from "./components/Navigation.vue"
 import Footer from "./components/Footer.vue"
 import { useStatsStore } from './features/admin/store/stats.store'
+import { useTitle } from '@/composables/useTitle'
 
 const route = useRoute()
 const statsStore = useStatsStore()
@@ -11,6 +12,8 @@ const statsStore = useStatsStore()
 const showFooter = computed(() => {
   return !route.path.startsWith('/admin')
 })
+
+useTitle()
 
 onMounted(async () => {
   if (!route.path.startsWith('/admin')) {
