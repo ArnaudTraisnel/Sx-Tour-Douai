@@ -51,44 +51,30 @@ const currentYear = new Date().getFullYear()
 
 <style scoped>
 .footer-gradient {
-  background: #111111;
-  position: relative;
-  overflow: hidden;
-}
-
-.footer-gradient::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    transparent 100%
-  );
+  min-height: 400px; /* Hauteur minimale fixe */
+  width: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 1));
+  color: white;
 }
 
 .social-icon-link {
   position: relative;
-  width: 40px;
-  height: 40px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  transition: all 0.3s ease;
+  width: 40px; /* Dimensions fixes */
+  height: 40px; /* Dimensions fixes */
+  transition: transform 0.2s;
 }
 
 .social-icon-bg {
   position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #ff4b4b, #ff0000);
+  border-radius: 50%;
   opacity: 0;
-  transform: scale(0.9);
+  transition: opacity 0.2s;
 }
 
 .social-icon-link:hover .social-icon-bg {

@@ -16,9 +16,25 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `
-          @import "@/assets/styles/variables.scss";
-        `
+        additionalData: `@import "@/assets/styles/variables.scss";`
+      }
+    }
+  },
+  build: {
+    target: 'es2015',
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor': ['vue', 'vue-router'],
+          'styles': ['@/assets/styles/main.scss']
+        }
       }
     }
   }
