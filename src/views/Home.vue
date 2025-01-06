@@ -60,8 +60,8 @@
       </div>
     </div>
   </div>
-  <ProgrammeSection />
   <PilotesSection />
+  <ProgrammeSection />
 </template>
 
 <script setup>
