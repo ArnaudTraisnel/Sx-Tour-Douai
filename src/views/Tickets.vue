@@ -4,57 +4,65 @@
     <div class="h-20"></div>
     
     <div class="container-custom mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20">
-      <section class="flex flex-col justify-center items-center">
+      <section class="flex flex-col items-center">
         <!-- En-tête avec espacement adaptatif -->
-        <div class="text-center space-y-4 mb-12 md:mb-16 lg:mb-20">
+        <div class="text-center space-y-4 mb-12 md:mb-16 lg:mb-20 w-full max-w-4xl mx-auto">
           <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-center text-gray-900">
             BILLETTERIE
           </h1>
-          <p class="text-gray-600 text-base sm:text-lg md:text-xl max-w-2xl mx-auto px-4">
+          <p class="text-gray-600 text-base sm:text-lg md:text-xl mx-auto px-4">
             Choisissez votre place pour vivre une expérience inoubliable au Supercross de Douai
           </p>
         </div>
 
-        <!-- Grille de tickets avec espacement responsive -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 w-full max-w-7xl">
-          <a 
-            v-for="(ticket, index) in tickets" 
-            :key="index"
-            :href="ticket.link"
-            target="_blank"
-            @click="handleTicketClick"
-            :class="[
-              'group relative overflow-hidden rounded-xl p-1 transition-all duration-300 hover:scale-105 hover:shadow-2xl',
-              ticket.gradientClass
-            ]"
-          >
-            <div class="relative flex flex-col h-full space-y-4 p-4 sm:p-6 text-white">
-              <div class="flex items-center justify-between">
-                <h3 class="text-lg sm:text-xl font-bold">{{ ticket.name }}</h3>
-                <span class="text-xl sm:text-2xl">{{ ticket.icon }}</span>
-              </div>
-              <p class="text-gray-100 text-sm sm:text-base flex-grow">{{ ticket.description }}</p>
-              <div class="flex items-center justify-between mt-2 sm:mt-4">
-                <span class="text-base sm:text-lg font-semibold">{{ ticket.price }}</span>
-                <span class="inline-flex items-center text-sm font-medium text-white group-hover:text-gray-200 transition-colors duration-300">
-                  Réserver
-                  <svg 
-                    class="w-4 h-4 sm:w-5 sm:h-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-1" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="currentColor"
-                  >
-                    <path 
-                      stroke-linecap="round" 
-                      stroke-linejoin="round" 
-                      stroke-width="2" 
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"
-                    />
-                  </svg>
-                </span>
+        <!-- Conteneur flex pour centrer la grille -->
+        <div class="w-full max-w-7xl px-4">
+          <!-- Utilisation de flex au lieu de grid pour un meilleur contrôle du centrage -->
+          <div class="flex flex-wrap justify-center -mx-2 sm:-mx-3 lg:-mx-4">
+            <div v-for="(ticket, index) in tickets" 
+                 :key="index"
+                 class="w-full md:w-1/2 lg:w-1/3 px-2 sm:px-3 lg:px-4 mb-4 sm:mb-6 lg:mb-8 flex justify-center"
+            >
+              <div class="w-full max-w-sm">
+                <a 
+                  :href="ticket.link"
+                  target="_blank"
+                  @click="handleTicketClick"
+                  :class="[
+                    'group relative overflow-hidden rounded-xl p-1 transition-all duration-300 hover:scale-105 hover:shadow-2xl block h-full',
+                    ticket.gradientClass
+                  ]"
+                >
+                  <div class="relative flex flex-col h-full space-y-4 p-4 sm:p-6 text-white">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-lg sm:text-xl font-bold">{{ ticket.name }}</h3>
+                      <span class="text-xl sm:text-2xl">{{ ticket.icon }}</span>
+                    </div>
+                    <p class="text-gray-100 text-sm sm:text-base flex-grow">{{ ticket.description }}</p>
+                    <div class="flex items-center justify-between mt-2 sm:mt-4">
+                      <span class="text-base sm:text-lg font-semibold">{{ ticket.price }}</span>
+                      <span class="inline-flex items-center text-sm font-medium text-white group-hover:text-gray-200 transition-colors duration-300">
+                        Réserver
+                        <svg 
+                          class="w-4 h-4 sm:w-5 sm:h-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-1" 
+                          fill="none" 
+                          viewBox="0 0 24 24" 
+                          stroke="currentColor"
+                        >
+                          <path 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            stroke-width="2" 
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                          />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </a>
               </div>
             </div>
-          </a>
+          </div>
         </div>
 
         <!-- Spacer du bas pour éviter que le contenu soit collé au bas de page -->
