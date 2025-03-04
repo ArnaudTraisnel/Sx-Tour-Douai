@@ -3,3 +3,5 @@ node_modules
 .env.local
 src/server/.env
 .DS_Store
+dist/
+.vite/
