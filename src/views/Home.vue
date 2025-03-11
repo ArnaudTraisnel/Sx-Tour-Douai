@@ -2,10 +2,10 @@
   <div class="min-h-screen">
     <div class="relative min-h-screen bg-gradient-to-b from-pink-50/30 to-blue-50/30">
       <!-- Video Background -->
-      <div class="absolute inset-0 w-full h-full overflow-hidden">
+      <div class="relative w-full h-[300px] md:h-screen overflow-hidden mt-16 md:mt-0">
         <video 
           ref="videoRef"
-          class="absolute min-w-full min-h-full object-cover"
+          class="absolute top-0 left-0 w-full h-full object-contain md:object-cover"
           autoplay 
           loop 
           muted 
@@ -23,52 +23,10 @@
         <div class="absolute inset-0 bg-custom-black/40"></div>
       </div>
 
-      <!-- Contenu principal -->
-       <!-- <div class="relative z-10 container-custom mx-auto">
-        <div class="flex flex-col items-center justify-center min-h-screen text-center">
-          <h1 class="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6">
-            <span class="text-white">Supercross</span>
-            <span class="ml-3 text-red-600"> Douai</span>
-          </h1>
-          
-          <p class="text-xl md:text-2xl lg:text-3xl text-white font-light mb-12 max-w-3xl">
-            Le plus grand événement de Supercross du Nord de la France
-          </p>
-          
-          <div class="flex flex-col sm:flex-row gap-6">
-            <router-link 
-              to="/tickets" 
-              class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-all duration-200 transform hover:scale-[1.02] group"
-            >
-              Réserver maintenant
-              <svg 
-                class="w-5 h-5 ml-2 transform transition-transform group-hover:translate-x-1" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-              >
-                <path 
-                  stroke-linecap="round" 
-                  stroke-linejoin="round" 
-                  stroke-width="2" 
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                />
-              </svg>
-            </router-link>
-            <router-link 
-              to="/contact" 
-              class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-custom-black bg-white rounded-lg hover:bg-gray-100 transition-all duration-200 transform hover:scale-[1.02]"
-            >
-              Nous contacter
-            </router-link>
-          </div>
-        </div>
-      </div>  -->
+      <PilotesSection />
+      <ProgrammeSection />
+      <PartnersSection />
     </div>
-
-    <PilotesSection />
-    <ProgrammeSection />
-    <PartnersSection />
   </div>
 </template>
 
