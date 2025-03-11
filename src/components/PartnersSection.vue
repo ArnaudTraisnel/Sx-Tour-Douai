@@ -73,7 +73,7 @@ const partners = [
   },
   {
     name: 'Fédération Française de Motocyclisme',
-    logo: '/images/partners/FFMOTO_LOGO.png'
+    logo: '/images/partners/FFMOTO_LOGO.webp'
   }
 ]
 
