@@ -8,6 +8,10 @@
             <span class="text-gray-900">Supercross</span>
             <span class="bg-gradient-to-r from-red-600 to-red-500 bg-clip-text text-transparent"> Douai</span>
           </router-link>
+          <div class="flex items-center ml-6 space-x-4 md:space-x-6 lg:space-x-8">
+            <img src="/images/partners/FFMOTO_LOGO.png" alt="Logo FFMoto" class="h-10 md:h-16 lg:h-20 w-auto object-contain"/>
+            <img src="/images/partners/Supercross_Championnat_FR.png" alt="Logo Championnat de France Supercross" class="h-10 md:h-16 lg:h-20 w-auto object-contain mix-blend-multiply"/>
+          </div>
         </div>
 
         <!-- Desktop Menu -->

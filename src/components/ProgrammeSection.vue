@@ -9,10 +9,14 @@
           </h2>
           
           <div class="text-lg space-y-4">
-            <p>Ouverture à 14H avec accès exclusif aux paddocks pour les tickets Premium et VIP</p>
-            <p>Ouverture à 20H pour les tickets regulars</p>
-            <p class="text-red-600 font-bold mt-6">Programme de la soirée publié le 1er juillet</p>
+            <p>Ouverture des portes à 14H avec accès exclusif aux paddocks pour les tickets Premium et VIP</p>
+            <p>Ouverture à 18H pour les tickets regulars avec accès à l'espace lounge</p>
+            <p class="text-red-600 font-bold mt-6">Programme détaillé publié le 1er juillet</p>
           </div>
+        </div>
+        <!-- Affiche -->
+        <div class="max-w-2xl mx-auto">
+          <img src="/images/affiche/affiche_supercross_douai.webp" alt="Affiche officielle du Supercross de Douai" class="w-full h-auto rounded-lg shadow-xl"/>
         </div>
       </div>
     </div>

@@ -61,15 +61,19 @@ import 'swiper/css/navigation'
 const partners = [
   {
     name: 'Gayant Expo Douai',
-    logo: '/images/partners/Logo_Gayant-Expo-Douai.png'
+    logo: '/images/partners/Logo_Gayant-Expo-Douai.webp'
   },
   {
     name: 'Département du Nord',
-    logo: '/images/partners/Logo_Nord-le-Departement.png'
+    logo: '/images/partners/Logo_Nord-le-Departement.webp'
   },
   {
     name: 'Région Hauts-de-France',
-    logo: '/images/partners/Logo_Region-hauts-de-France.png'
+    logo: '/images/partners/Logo_Region-hauts-de-France.webp'
+  },
+  {
+    name: 'Fédération Française de Motocyclisme',
+    logo: '/images/partners/FFMOTO_LOGO.webp'
   }
 ]
 
