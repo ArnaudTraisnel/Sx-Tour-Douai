@@ -24,7 +24,7 @@
       </div>
 
       <!-- Contenu principal -->
-       <div class="relative z-10 container-custom mx-auto">
+       <!-- <div class="relative z-10 container-custom mx-auto">
         <div class="flex flex-col items-center justify-center min-h-screen text-center">
           <h1 class="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6">
             <span class="text-white">Supercross</span>
@@ -63,7 +63,7 @@
             </router-link>
           </div>
         </div>
-      </div> 
+      </div>  -->
     </div>
 
     <PilotesSection />
