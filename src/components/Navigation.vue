@@ -9,9 +9,8 @@
             <span class="bg-gradient-to-r from-red-600 to-red-500 bg-clip-text text-transparent"> Douai</span>
           </router-link>
           <div class="flex items-center ml-6 space-x-1 md:space-x-2 lg:space-x-3">
-            <img src="/images/partners/FFMOTO_LOGO.png" alt="Logo FFMoto" class="h-10 md:h-16 lg:h-20 w-auto object-contain"/>
-            <img src="/images/partners/Supercross_Championnat_FR.png" alt="Logo Championnat de France Supercross" class="h-10 md:h-16 lg:h-20 w-auto object-contain mix-blend-multiply"/>
-          </div>
+            <img src="/images/partners/FFMOTO_LOGO.png" alt="Logo FFMoto" class="h-20 md:h-24 lg:h-28 w-auto object-contain"/>
+            <img src="/images/partners/Supercross_Championnat_FR.png" alt="Logo Championnat de France Supercross" class="h-20 md:h-20 lg:h-36 w-auto object-contain mix-blend-multiply"/>          </div>
         </div>
 
         <!-- Desktop Menu -->
