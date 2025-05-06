@@ -9,9 +9,10 @@
           </h2>
           
           <div class="text-lg space-y-4">
-            <p>Ouverture des portes à 14H avec accès exclusif aux paddocks pour les tickets Premium et VIP</p>
-            <p>Ouverture à 18H pour les tickets regulars avec accès à l'espace lounge</p>
-            <p class="text-red-600 font-bold mt-6">Programme détaillé publié le 1er juillet</p>
+            <p>Ouverture des portes à 13H30 avec accès exclusif aux paddocks pour les tickets Carré or et VIP</p>
+            <p>Ouverture à 18H30 pour les tickets Tribune et Mezzanine</p>
+            <p>Food truck, bar et friterie</p>
+            <p class="text-red-600 font-bold mt-6">Programme sportif publié le 1er juillet.</p>
           </div>
         </div>
         <!-- Affiche -->
