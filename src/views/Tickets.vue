@@ -5,7 +5,7 @@
       <div class="container mx-auto px-4 text-center">
         <h1 class="text-gray-900 text-4xl md:text-6xl font-bold mb-6">BILLETTERIE</h1>
         <p class="text-slate-600 text-xl max-w-2xl mx-auto">
-          Réservez dès maintenant vos places pour le Grand Prix de France SuperEnduro
+          Réservez dès maintenant vos places pour le Supercross de Douai
         </p>
       </div>
     </section>
