@@ -150,20 +150,20 @@ const toggleItem = (index) => {
 
 const faqItems = [
   {
-    question: "Quand aura lieu le SX Tour Douai ?",
-    answer: "Le SX Tour Douai aura lieu le 15 juin 2024. L'événement se déroulera sur une journée complète avec des qualifications le matin et les finales l'après-midi."
+    question: "Quand aura lieu le SX Tour de Douai ?",
+    answer: "Le SX Tour Douai aura lieu le 18 Octobre 2025. L'événement se déroulera avec des qualifications de 13h30 à 17h00. Les finales se dérouleront à partir de 20h00"
   },
   {
     question: "Comment acheter des billets ?",
-    answer: "Les billets sont disponibles sur notre site dans la section 'Tickets'. Vous pouvez choisir entre différentes catégories : Standard, VIP, et Pack Famille."
+    answer: "Les billets sont disponibles sur notre site sur la page 'Billetterie'."
   },
   {
     question: "Y a-t-il un âge minimum pour assister à l'événement ?",
     answer: "Non, l'événement est ouvert à tous les âges. Les enfants de moins de 12 ans doivent être accompagnés d'un adulte. Des tarifs spéciaux sont disponibles pour les enfants."
   },
   {
-    question: "Que faire en cas de pluie ?",
-    answer: "L'événement a lieu même en cas de pluie légère. En cas de conditions météorologiques extrêmes, l'événement peut être reporté. Dans ce cas, vos billets resteront valables pour la nouvelle date."
+    question: "Puis-je choisir ma place(s) ?",
+    answer: "Oui la séléction de la place se fait directement sur le plan du stade à l'achat des billets."
   }
 ]
 
