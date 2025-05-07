@@ -4,13 +4,14 @@
       <div class="flex justify-between items-center h-16 md:h-20">
         <!-- Logo -->
         <div class="flex items-center">
-          <router-link to="/" class="text-2xl md:text-3xl lg:text-4xl font-black tracking-tight whitespace-nowrap">
+          <router-link to="/" class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-black tracking-tight whitespace-nowrap">
             <span class="text-gray-900">Supercross</span>
             <span class="bg-gradient-to-r from-red-600 to-red-500 bg-clip-text text-transparent"> Douai</span>
           </router-link>
-          <div class="flex items-center ml-6 space-x-1 md:space-x-2 lg:space-x-3">
-            <img src="/images/partners/FFMOTO_LOGO.png" alt="Logo FFMoto" class="h-20 md:h-24 lg:h-28 w-auto object-contain"/>
-            <img src="/images/partners/Supercross_Championnat_FR.png" alt="Logo Championnat de France Supercross" class="h-20 md:h-20 lg:h-36 w-auto object-contain mix-blend-multiply"/>          </div>
+          <div class="flex items-center ml-4 sm:ml-6 space-x-1 sm:space-x-2 md:space-x-3">
+            <img src="/images/partners/FFMOTO_LOGO.png" alt="Logo FFMoto" class="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain"/>
+            <img src="/images/partners/Supercross_Championnat_FR.png" alt="Logo Championnat de France Supercross" class="h-12 sm:h-16 md:h-20 lg:h-28 w-auto object-contain mix-blend-multiply"/>
+          </div>
         </div>
 
         <!-- Desktop Menu -->
