@@ -164,6 +164,10 @@ const faqItems = [
   {
     question: "Puis-je choisir ma place(s) ?",
     answer: "Oui la séléction de la place se fait directement sur le plan du stade à l'achat des billets."
+  },
+  {
+    question: "Des places PMR sont-elles prévus pour les PMR ?",
+    answer: "Oui, tout les rangs les plus proche de la piste sont accessibles aux PMR."
   }
 ]
 
