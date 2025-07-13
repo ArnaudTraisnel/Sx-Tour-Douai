@@ -1,0 +1,24 @@
+# Dépendances Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Fichiers temporaires
+*.tmp
+*.temp
+
+# Fichiers de test
+test-videos/
+output/
+*.test.*
+
+# Logs
+*.log
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Cache ESLint
+.eslintcache

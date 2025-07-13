@@ -1,0 +1,32 @@
+{
+  "name": "sx-tour-video-compressor",
+  "version": "1.0.0",
+  "description": "Scripts de compression vidéo WebM pour SX Tour Douai",
+  "main": "video-compressor.js",
+  "type": "commonjs",
+  "scripts": {
+    "compress": "node video-compressor.js",
+    "help": "node video-compressor.js",
+    "lint": "eslint *.js",
+    "lint:fix": "eslint *.js --fix"
+  },
+  "keywords": [
+    "video",
+    "compression",
+    "webm",
+    "ffmpeg",
+    "vp9",
+    "opus"
+  ],
+  "author": "SX Tour Douai",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
+  },
+  "bin": {
+    "video-compressor": "./video-compressor.js"
+  }
+}

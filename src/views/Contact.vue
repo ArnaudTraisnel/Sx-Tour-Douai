@@ -151,11 +151,11 @@ const toggleItem = (index) => {
 const faqItems = [
   {
     question: "Quand aura lieu le SX Tour de Douai ?",
-    answer: "Le SX Tour Douai aura lieu le 18 Octobre 2025. L'événement se déroulera avec des qualifications de 13h30 à 17h00. Les finales se dérouleront à partir de 20h00"
+    answer: "Le SX Tour Douai aura lieu le 4 Octobre 2025. L'événement se déroulera avec des qualifications de 13h30 à 17h00. Les finales se dérouleront à partir de 20h00"
   },
   {
     question: "Comment acheter des billets ?",
-    answer: "Les billets sont disponibles sur notre site sur la page 'Billetterie'."
+    answer: "Les billets sont disponibles sur notre site via la page 'Billetterie'."
   },
   {
     question: "Y a-t-il un âge minimum pour assister à l'événement ?",

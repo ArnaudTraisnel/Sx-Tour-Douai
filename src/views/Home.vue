@@ -2,25 +2,37 @@
   <div class="min-h-screen">
     <div class="relative min-h-screen bg-gradient-to-b from-pink-50/30 to-blue-50/30">
       <!-- Video Background -->
-      <div class="relative w-full h-[300px] md:h-screen overflow-hidden mt-16 md:mt-0">
-        <video 
-          ref="videoRef"
-          class="absolute top-0 left-0 w-full h-full object-contain md:object-cover"
-          autoplay 
-          loop 
-          muted 
-          playsinline
-          preload="auto"
-          @error="handleVideoError"
+      <div class="relative w-full mt-16 md:mt-0">
+        <!-- Container responsive pour la vidéo avec aspect ratio adaptatif -->
+        <div 
+          class="relative w-full"
+          :style="{ 
+            aspectRatio: isMobileOrTablet ? '9/16' : '16/9',
+            minHeight: isMobileOrTablet ? '70vh' : 'auto'
+          }"
         >
-          <source 
-            :src="videoUrl" 
-            type="video/mp4"
+          <video 
+            ref="videoRef"
+            :class="[
+              'absolute inset-0 w-full h-full bg-black',
+              isMobileOrTablet ? 'object-cover' : 'object-contain'
+            ]"
+            autoplay 
+            loop 
+            muted 
+            playsinline
+            preload="auto"
+            @error="handleVideoError"
           >
-          Votre navigateur ne supporte pas la lecture de vidéos.
-        </video>
-        <!-- Overlay pour assurer la lisibilité du texte -->
-        <div class="absolute inset-0 bg-custom-black/40"></div>
+            <source 
+              :src="videoUrl" 
+              type="video/webm"
+            >
+            Votre navigateur ne supporte pas la lecture de vidéos.
+          </video>
+          <!-- Overlay pour assurer la lisibilité du texte -->
+          <div class="absolute inset-0 bg-custom-black/40"></div>
+        </div>
       </div>
 
       <PilotesSection />
@@ -37,16 +49,22 @@ import PilotesSection from '../components/PilotesSection.vue'
 import PartnersSection from '../components/PartnersSection.vue'
 
 const videoRef = ref(null)
-const videoUrl = ref('/videos/SXTour2024.mp4')
+const videoUrl = ref('/videos/SXTour2025.webm')
+const isMobileOrTablet = ref(false)
 
-const handleVideoError = (error) => {
-  console.error('Erreur de lecture vidéo:', error)
+const handleVideoError = () => {
+  // Erreur de lecture vidéo
+}
+
+const checkDeviceType = () => {
+  isMobileOrTablet.value = window.innerWidth <= 1024 // Inclut les tablettes
 }
 
 const updateVideoSource = () => {
-  videoUrl.value = window.innerWidth <= 768 
-    ? '/videos/SXTour2024-mobile.mp4'
-    : '/videos/SXTour2024.mp4'
+  checkDeviceType()
+  videoUrl.value = isMobileOrTablet.value 
+    ? '/videos/SXTour2025-mobile.webm'
+    : '/videos/SXTour2025.webm'
 }
 
 const startVideo = async () => {
@@ -57,7 +75,7 @@ const startVideo = async () => {
       await videoRef.value.play()
       videoRef.value.currentTime = 0
     } catch (error) {
-      console.error('Erreur lors de la lecture de la vidéo:', error)
+      // Erreur lors de la lecture de la vidéo
     }
   }
 }
@@ -70,6 +88,7 @@ const handleResize = () => {
 }
 
 onMounted(() => {
+  checkDeviceType()
   updateVideoSource()
   startVideo()
   window.addEventListener('resize', handleResize)
@@ -100,18 +119,5 @@ onUnmounted(() => {
 
 .bg-custom-black {
   background-color: #000000;
-}
-
-/* Optimisation de la vidéo en arrière-plan */
-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: cover;
 }
 </style>
